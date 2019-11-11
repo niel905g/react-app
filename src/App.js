@@ -102,7 +102,7 @@ App.defaultProps = {
      }
    } */
 
-   class App extends React.Component {
+/*    class App extends React.Component {
      render() {
        return <Title text="12345" />
      }
@@ -116,11 +116,42 @@ App.defaultProps = {
         if(!(propName in props)){
           return new Error('missing $propName')
         }
-        if(props[propName].lengh < 6){
+        if(props[propName].length < 6){
           return new Error('$propName was too short')
         }
      }
-   }
+   } */
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {currentEvent: '---'}
+    this.update = this.update.bind(this)
+  }
+  update(e){
+    this.setState({currentEvent: e.type})
+  }
+  render() {
+    return (
+      <div>
+        <textarea
+          onKeyPress={this.update}
+          onCopy={this.update}
+          onCut={this.update}
+          onPaste={this.update}
+          onFocus={this.update}
+          onBlur={this.update}
+          onDoubleClick={this.update}
+          onTouchStart={this.update}
+          onTouchMove={this.update}
+          onTouchEnd={this.update}
+          cols="30"
+          rows="10"/>
+          <h1>{this.state.currentEvent}</h1>
+      </div>
+    )
+  }
+}
 
 
 export default App
