@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom'; //hører til linje 164
 // eslint-disable-next-line
 import PropTypes from 'prop-types';
 
@@ -122,7 +123,7 @@ App.defaultProps = {
      }
    } */
 
-class App extends React.Component {
+/* class App extends React.Component {
   constructor(){
     super();
     this.state = {currentEvent: '---'}
@@ -150,6 +151,41 @@ class App extends React.Component {
           <h1>{this.state.currentEvent}</h1>
       </div>
     )
+  }
+} */
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { a: '' }
+  }
+  update() {
+    this.setState({
+      a: this.a.refs.input.value, //ReactDOM.findDOMNode (this.a).value,
+      b: this.refs.b.value
+    })
+  }
+  render() {
+    return (
+      <div>
+        <Input
+        ref={ component => this.a = component}
+          update={this.update.bind(this)}
+        /> {this.state.a}
+        <hr />
+        <input
+        ref="b"
+          type="text"
+          onChange={this.update.bind(this)}
+        /> {this.state.b}
+      </div>
+    )
+  }
+}
+
+class Input extends React.Component {
+  render(){
+    return <div><input ref="input" type="text" onChange={this.props.update}/></div>
   }
 }
 
