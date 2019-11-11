@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; //hører til linje 164
+//import ReactDOM from 'react-dom'; //hører til linje 164 demo
 // eslint-disable-next-line
 import PropTypes from 'prop-types';
 
