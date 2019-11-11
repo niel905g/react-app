@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; //hører til linje 164 demo og 220
+import ReactDOM from 'react-dom'; //hører til linje 164 demo og 220 og 243
 // eslint-disable-next-line
 import PropTypes from 'prop-types';
 
@@ -189,7 +189,7 @@ class Input extends React.Component {
   }
 } */
 
-class App extends React.Component {
+/* class App extends React.Component {
   constructor(){
     super();
     this.state = {val: 0}
@@ -238,7 +238,39 @@ class Wrapper extends React.Component {
       </div>
     )
   }
+} */
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {increasing: false}
+  }
+  update() {
+    ReactDOM.render(
+      <App val={this.props.val + 1} />,
+      document.getElementById('root'))
+  }
+  UNSAFE_componentWillReceiveProps(nextProps){
+    this.setState({increasing: nextProps.val > this.props.val})
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.val % 5 === 0;
+  }
+  render() {
+    console.log(this.state.increasing)
+    return (
+      <button onClick={this.update.bind(this)}>
+        {this.props.val}
+      </button>
+    )
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    // eslint-disable-next-line
+    console.log('prevProps: ${prevProps.val}')
+  }
 }
 
+App.defaultProps = {val: 0}
 
-export default Wrapper
+export default App //Wrapper
