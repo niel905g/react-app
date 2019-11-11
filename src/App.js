@@ -1,26 +1,57 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PropTypes from 'prop-types';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+/* class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      txt: 'this is the state txt'
+    }
+  }
+update( e ){
+  this.setState({txt: e.target.value})
+}
+  render() {
+      return <h1>{this.state.txt}</h1>
+  }
+} */
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      txt: 'this is dynamic text'
+    }
+  }
+
+  update( e ){
+    this.setState({txt: e.target.value})
+  }
+
+  render() {
+    let txtProp = this.props.txt;
+    let numProp = this.props.cat;
+    return (
+      <div>
+        <h1>Hello World! - {txtProp} + {numProp}</h1>
+        <input type="text" onChange={this.update.bind(this)}/>
+        <h2>{this.state.txt}</h2>
+      </div>
+    )
+  }
 }
 
-export default App;
+App.propTypes = {
+  txt: PropTypes.string,
+  cat: PropTypes.number.isRequired
+}
+
+App.defaultProps = {
+  txt: "Hejsa allesammen (default text)"
+
+}
+
+// const App = () => <h1>Hello Stateless</h1>
+
+export default App
