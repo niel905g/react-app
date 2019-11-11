@@ -88,7 +88,7 @@ App.defaultProps = {
  const Widget = (props) => 
    <input type="text" onChange={props.update} /> */
 
-   class App extends React.Component {
+/*    class App extends React.Component {
      render() {
        return <Button>I <Heart /> React</Button>
      }
@@ -100,8 +100,27 @@ App.defaultProps = {
      render() {
        return <span>&hearts;</span>
      }
+   } */
+
+   class App extends React.Component {
+     render() {
+       return <Title text="12345" />
+     }
    }
-   
+
+   const Title = (props) => <h1>Title: {props.text}</h1>
+
+   Title.propTypes = {
+     //text: React.PropTypes.string.isRequired //does not work
+     text(props, propName, component){
+        if(!(propName in props)){
+          return new Error('missing $propName')
+        }
+        if(props[propName].lengh < 6){
+          return new Error('$propName was too short')
+        }
+     }
+   }
 
 
 export default App
